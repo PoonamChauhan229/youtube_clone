@@ -21,7 +21,7 @@ const Head = () => {
           className="w-1/2 border border-gray-400 p-2 rounded-l-full"
         />
         <button className="border border-gray  px-5 py-2 rounded-r-full bg-gray-100">
-          🔍
+        <i class="bi bi-search"></i>
         </button>
       </div>
       <div>

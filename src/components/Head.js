@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utilis/appSlice";
-import { YOUTUBE_SEARCH_API } from "../utilis/constants";
+import { YOUTUBE_SEARCH_API, YOUTUBE_SEARCH_SHOWVIDEO_API } from "../utilis/constants";
 import { cacheResults } from "../utilis/searchSlice";
+import { searchResults } from "../utilis/updateSearchSlice";
 
 
 
@@ -22,10 +23,12 @@ const Head = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
+      getSuggestedVideoList();
       if (searchCache[searchQuery]) {
         setSuggestions(searchCache[searchQuery]);
       } else {
         getSearchSuggestions();
+        
       }
     }, 200);
 
@@ -37,7 +40,7 @@ const Head = () => {
   async function getSearchSuggestions() {
     const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
     const json = await data.json();
-    //console.log(json[1]);
+    console.log(json[1]);
     setSuggestions(json[1]);
 
     // update cache
@@ -48,10 +51,23 @@ const Head = () => {
     );
   }
 
-  const suggestionsDisplay=(selectedItem) => {
-    console.log(selectedItem)
+  async function getSuggestedVideoList(){
+    if(searchQuery!==""){
+    const data = await fetch(YOUTUBE_SEARCH_SHOWVIDEO_API + searchQuery);
+    const json = await data.json();
+    console.log(json);
+    }
   }
 
+const suggestionsDisplay=(x)=>{
+    console.log(x)
+    setSearchQuery(x)
+    setShowSuggestions(false)
+}
+
+const showVideoList=()=>{
+  dispatch(searchResults(searchQuery))
+}
   return (
     <div className="grid grid-flow-col p-5 m-2 shadow-lg">
       <div className="flex col-span-1">
@@ -78,9 +94,13 @@ const Head = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onFocus={(e) => setShowSuggestions(true)}
-            onBlur={(e) => setShowSuggestions(false)}
+            //onBlur={(e) => setShowSuggestions(false)}
           />
-          <button className="border border-gray  px-5 py-2 rounded-r-full bg-gray-100">
+          <button className="border border-gray  px-5 py-2 rounded-r-full bg-gray-100"
+          onClick={()=>{
+            showVideoList()
+          }}
+          >
             <i className="bi bi-search"></i>
           </button>
         </div>
@@ -91,13 +111,16 @@ const Head = () => {
               {suggestions.map((element,index) => {
                 //console.log(element)
                 return (
-                  <div key ={index} onClick={()=>suggestionsDisplay(element)}>
-                  <li className="py-2 px-5 hover:bg-gray-100" >
-                    {" "}
+                
+                  <li className="py-2 px-5 hover:bg-gray-100 " key={index}
+                  onClick={() => {
+                    suggestionsDisplay(element)
+                  }}
+                  >
                     <i className="bi bi-search px-2"></i>
                     {element}
                   </li>
-                  </div>
+                 
                 );
               })}
             </ul>

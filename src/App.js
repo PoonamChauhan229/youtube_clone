@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import WatchPage from "./components/WatchPage";
 import MainContainer from "./components/MainContainer";
+import LoginDisplay from "./components/LoginDisplay";
 const appRouter = createBrowserRouter([
   {
     path: "/",
@@ -16,9 +17,14 @@ const appRouter = createBrowserRouter([
         element:<MainContainer/>
       },
       {
+        path: "/auth",
+        element: <LoginDisplay/>,
+      },
+      {
         path: "/watch",
         element: <WatchPage />,
       },
+      
     ],
   },
 ]);

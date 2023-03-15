@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { toggleMenu } from "../utilis/appSlice";
 import { YOUTUBE_SEARCH_API, YOUTUBE_SEARCH_SHOWVIDEO_API } from "../utilis/constants";
 import { cacheResults } from "../utilis/searchSlice";
 import { searchResults } from "../utilis/updateSearchSlice";
+import Login from "./Login";
 
 
 
@@ -128,11 +130,7 @@ const showVideoList=()=>{
         )}
       </div>
       <div>
-        <img
-          className="h-8"
-          alt="user"
-          src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
-        />
+       <Login/>
       </div>
     </div>
   );

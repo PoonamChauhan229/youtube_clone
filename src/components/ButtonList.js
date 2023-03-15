@@ -1,10 +1,10 @@
 import React from 'react'
 import Button from './Button'
 
-const btnList=["All","Gaming","Songs","Live","Soccer","Cricket","Cooking","Valentines","Jukebox","Javascript","Computers"]
+const btnList=["All","Gaming","Songs","Love","BollyWood","Live","Soccer","Cricket","Cooking","Valentines","Jukebox","Javascript","Computers"]
 const ButtonList = () => {
   return (
-    <div className='flex'>
+    <div className='flex scrollbar-hide w-[1248px] overflow-x-scroll'>
       {
         btnList.map((element,index)=>{
           //console.log(element)

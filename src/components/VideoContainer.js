@@ -19,7 +19,7 @@ const VideoContainer = () => {
   async function getVideos(){
     let data=await fetch(YOUTUBE_VIDEOS_API)
     let json=await data.json();
-    //console.log(json.items)
+    console.log(json.items)
     setVideo(json.items)
   }
 
@@ -27,7 +27,7 @@ const VideoContainer = () => {
     if(searchQuery!==""){
     const data = await fetch(YOUTUBE_SEARCH_SHOWVIDEO_API + searchQuery);
     const json = await data.json();
-    //console.log(json);
+    console.log(json);
     setResultVideos(json.items);
     //console.log(json.items);
     setIsCalled(true);
@@ -48,7 +48,7 @@ console.log(resultVideos)
       }
     </div>
   )
-  }
+  }else{
   return (
     <div className=' w-full flex flex-wrap'>
       {
@@ -61,7 +61,7 @@ console.log(resultVideos)
         } )
       }
     </div>
-  )
+  )}
 }
 
 export default VideoContainer

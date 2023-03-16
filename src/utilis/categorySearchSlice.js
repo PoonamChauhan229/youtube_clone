@@ -8,7 +8,7 @@ const categorySearchSlice=createSlice({
     },
     reducers:{
         categorysearchResults:(state,action)=>{
-            state.isCategorySearched=true;
+            state.isCategorySearched=!state.isCategorySearched;
             state.categorysearchQuery=action.payload;
         }
     }

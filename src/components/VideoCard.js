@@ -30,7 +30,7 @@ const VideoCard = ({info}) => {
   async function getChannelIcon(){
     let data=await fetch(`https://youtube.googleapis.com/youtube/v3/channels?part=snippet&id=${channelId}&key=${API_Key}`)
     let json=await data.json();
-    console.log(json.items)
+    //console.log(json.items)
     setChannelIcon(json.items[0].snippet.thumbnails.default.url)
   }
    // console.log(info)
@@ -50,7 +50,7 @@ const VideoCard = ({info}) => {
             <li className='font-medium py-2'><i className="bi bi-eye-fill "></i>{" "}{numeral(views).format("0.a")} Views</li>
             <li className='font-semibold'>{moment(publishedAt).fromNow()}</li>
             <div className='flex'>
-            <img className='rounded-full w-10 h-10' src={channelIcon} alt="thumbnail" />
+            <img className='rounded-full w-10 h-10 shadow' src={channelIcon} alt="thumbnail" />
             <li className='font-semibold py-3 ml-2'>{channelTitle}</li>
             </div>
         </ul>

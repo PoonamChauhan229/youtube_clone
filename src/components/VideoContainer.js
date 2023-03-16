@@ -8,14 +8,19 @@ import VideoCard from './VideoCard';
 const VideoContainer = () => {
   const { searchQuery, isSearched } = useSelector((store) => store.results);
   const [isCalled, setIsCalled] = useState(false);
+  const [isCategoryCalled, setisCategoryCalled] = useState(false);
   const [resultVideos, setResultVideos] = useState([]);
 
   const[video,setVideo]=useState([])
 
-  useEffect(() => {
-     isSearched ? getSuggestedVideoList() : getVideos();
-  }, [isSearched, searchQuery]);
 
+  const { isCategorySearched,categorysearchQuery} = useSelector((store) => store.categoryResults);
+  
+  useEffect(() => {
+     isSearched ? getSuggestedVideoList() : isCategorySearched? getCategoryVideoList(): getVideos();
+  }, [isSearched, searchQuery,isCategorySearched]);
+
+  console.log(isCategorySearched,categorysearchQuery)
   async function getVideos(){
     let data=await fetch(YOUTUBE_VIDEOS_API)
     let json=await data.json();
@@ -33,8 +38,19 @@ const VideoContainer = () => {
     setIsCalled(true);
     }
   }
+
+  async function getCategoryVideoList(){
+    if(categorysearchQuery!==""){
+    const data = await fetch(YOUTUBE_SEARCH_SHOWVIDEO_API + categorysearchQuery);
+    const json = await data.json();
+    console.log(json);
+    setResultVideos(json.items);
+    //console.log(json.items);
+    setisCategoryCalled(true)
+    }
+  }
 console.log(resultVideos)
-  if (isCalled) {
+  if (isCalled||isCategoryCalled) {
   return (
     <div className=' w-full flex flex-wrap'>
       {

@@ -8,15 +8,15 @@ import {
 import VideoCard from "./VideoCard";
 
 import InfiniteScroll from "react-infinite-scroll-component";
+import Shimmer from "./Shimmer";
 
 const VideoContainer = () => {
   const { searchQuery, isSearched } = useSelector((store) => store.results);
   const [isCalled, setIsCalled] = useState(false);
   const [isCategoryCalled, setisCategoryCalled] = useState(false);
   const [resultVideos, setResultVideos] = useState([]);
-  const [isVideo,setIsVideo]=useState(false)
   const [video, setVideo] = useState([]);
-  const [scrollVideo,setScrollVideo]=useState(video)
+  const [hasMore, sethasMore] = useState(true);
   const { isCategorySearched, categorysearchQuery } = useSelector(
     (store) => store.categoryResults
   );
@@ -30,20 +30,19 @@ const VideoContainer = () => {
   }, [isSearched, searchQuery, isCategorySearched]);
 
 
-  useEffect(()=>{
-    fetchmoreData()
-  },[setIsVideo])
-  console.log(isCategorySearched, categorysearchQuery);
+  // useEffect(()=>{
+  //   fetchmoreData()
+  // },[])
+
+ // console.log(isCategorySearched, categorysearchQuery);
   async function getVideos() {
     let data = await fetch(YOUTUBE_VIDEOS_API);
     let json = await data.json();
-    console.log(json.items);
+   // console.log(json.items);
     setVideo(json.items);
-    setScrollVideo(json.items);
-    setIsVideo(true)
-    
+       
   }
-
+  console.log(video) 
   async function getSuggestedVideoList() {
     if (searchQuery !== "") {
       const data = await fetch(YOUTUBE_SEARCH_SHOWVIDEO_API + searchQuery);
@@ -68,21 +67,28 @@ const VideoContainer = () => {
     }
   }
 
- async function fetchmoreData(){
+ async function fetchVideos(){
   let data = await fetch(YOUTUBE_VIDEOS_API);
-    let json = await data.json();
-    console.log(json.items);
-   setScrollVideo([...video,...json.items]);
-    console.log(scrollVideo)
- }
+   let json = await data.json();
+  // console.log(json.items)
+    return json.items
+  }
+async function fetchmoreData(){
+  const videoinfinite=await fetchVideos();
+  setVideo([...video,...videoinfinite])
+  // if (videoinfinite.length === 0 || videoinfinite.length < 40) {
+  //   sethasMore(false);
+  // }
+}
 
-  console.log(resultVideos);
+
+ // console.log(resultVideos);
   if (isCalled || isCategoryCalled) {
     return (
       
         <InfiniteScroll
           dataLength={resultVideos.length} //This is important field to render the next data
-          //next={fetchData}
+          // next={fetchData}
           hasMore={true}
           loader={<h4>Loading...</h4>}         
         >
@@ -108,10 +114,10 @@ const VideoContainer = () => {
         <InfiniteScroll
           dataLength={resultVideos.length} //This is important field to render the next data
           hasMore={true}
-          next={fetchmoreData}          
-          loader={<h4>Loading...</h4>}
+          next={setTimeout(fetchmoreData,500)}          
+          loader={<Shimmer/>}
         >
-           <div  className=" w-full flex flex-wrap  h-[550px]">
+           <div className=" w-full flex flex-wrap">
           {video.map((element) => {
             // console.log(element.id)
             return (

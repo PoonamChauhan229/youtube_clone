@@ -117,16 +117,18 @@ async function fetchmoreData(){
           next={setTimeout(fetchmoreData,500)}          
           loader={<Shimmer/>}
         >
-           <div className=" m-2 border w-[1100px] flex flex-wrap">
-          {video.map((element) => {
-            // console.log(element.id)
-            return (
-              <Link to={"/watch?v=" + element.id} key={element.id}>
-                <VideoCard info={element} />
-              </Link>
-            );
-          })}
-            </div>
+           {
+            !video?<Shimmer/>:<div className=" m-2 border w-[1100px] flex flex-wrap">
+            {video?.map((element) => {
+              // console.log(element.id)
+              return (
+                <Link to={"/watch?v=" + element.id} key={element.id}>
+                  <VideoCard info={element} />
+                </Link>
+              );
+            })}
+              </div>
+           }
         </InfiniteScroll>
     
     );

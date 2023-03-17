@@ -4,7 +4,7 @@ import Sidebar from './Sidebar'
 
 const Body = () => {
   return (
-    <div className='flex w-full border'>
+    <div className='flex w-[1343px] border'>
         <Sidebar/>
         <Outlet/>
     </div>

@@ -7,7 +7,7 @@ const btnList=["All","Gaming","Songs","Love","BollyWood","Live","Soccer","Cricke
 
  
   return (
-    <div className='flex scrollbar-hide w-[1248px] overflow-x-scroll'>
+    <div className='flex scrollbar-hide w-[1100px] overflow-x-scroll'>
       {
         btnList.map((element,index)=>{
           //console.log(element)

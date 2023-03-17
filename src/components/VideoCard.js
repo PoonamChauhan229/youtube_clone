@@ -42,7 +42,7 @@ const VideoCard = ({info}) => {
 
   
     return (info===undefined)?null:  (
-    <div className='m-2 p-2 shadow-lg w-[284px] h-89 hover:bg-gray-300'>
+    <div className='m-2 p-2 shadow-lg w-[260px] h-89 hover:bg-gray-300'>
         <img className='rounded-lg' src={thumbnails.medium.url} alt="thumbnail" />
         <span>{newDuration}</span>
         <ul>

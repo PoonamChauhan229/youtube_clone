@@ -4,9 +4,8 @@ import { useSearchParams } from "react-router-dom";
 import { closeMenu } from "../utilis/appSlice";
 import CommentsContainer from "./CommentsContainer";
 import LiveChat from "./LiveChat";
-import VideoMetaData from "./VideoMetaData";
 
-const WatchPage = () => {
+const LivePage = () => {
   let [searchParams] = useSearchParams();
   // console.log(searchParams.get("v"));
   const dispatch = useDispatch();
@@ -29,14 +28,12 @@ const WatchPage = () => {
           ></iframe>
         </div>
         <div className="w-full">
-          
+          <LiveChat />
         </div>
       </div>
-      <div className="px-5">
-      <VideoMetaData/>
-      </div>
+      <CommentsContainer />
     </div>
   );
 };
 
-export default WatchPage;
+export default LivePage;

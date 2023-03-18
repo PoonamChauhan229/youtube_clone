@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.channelBlock .lazy-load-image-background img{
+    height:40px !important;
+    width:40px !important;
+    border-radius: 9999px !important;
+}

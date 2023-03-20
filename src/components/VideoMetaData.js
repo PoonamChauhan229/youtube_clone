@@ -67,6 +67,7 @@ const VideoMetaData = () => {
             </ShowMoreText>
          </div>
       </div>
+      
   )
 }
 

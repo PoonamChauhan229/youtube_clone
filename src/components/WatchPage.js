@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import { closeMenu } from "../utilis/appSlice";
 import CommentsContainer from "./CommentsContainer";
 import LiveChat from "./LiveChat";
+import VideoComments from "./VideoComments";
 import VideoHorizontal from "./VideoHorizontal";
 import VideoMetaData from "./VideoMetaData";
 
@@ -16,11 +17,12 @@ const WatchPage = () => {
   }, []);
 
   return (
-    <div className="flex flex-col w-full">
+    <>
+    <div className="flex flex-col">
       <div className="px-5 flex w-full">
         <div className="">
           <iframe
-            width="850"
+            width="750"
             height="450"
             src={"https://www.youtube.com/embed/" + searchParams.get("v")}
             title="YouTube video player"
@@ -35,9 +37,13 @@ const WatchPage = () => {
       </div>
       <div className="px-5">
       <VideoMetaData/>
-      <VideoHorizontal/>
+      <VideoComments/>
       </div>
     </div>
+    <div>
+    <VideoHorizontal/>
+    </div>
+    </>
   );
 };
 

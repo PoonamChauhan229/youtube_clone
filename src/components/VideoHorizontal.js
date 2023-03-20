@@ -10,35 +10,26 @@ const VideoHorizontal = () => {
   
 
    return (
-      <div className='border-b-[0.3px] border-solid border-gray-600 m-1 py-2 align-center'>
-         <div className='videoHorizontal__left'>
+      <div className='flex border-b-[0.3px] border-solid border-gray-600 m-1 py-2 align-center'>
+         <div className='left'>
             <LazyLoadImage
                src='https://www.pngkey.com/png/full/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png'
                effect='blur'
                className='videoHorizontal__thumbnail'
-               wrapperClassName='videoHorizontal__thumbnail-wrapper'
             />
-            <span className='video__top__duration'>{_duration}</span>
+            <span className='duration'>{_duration}</span>
          </div>
-         <div className='videoHorizontal__right p-0'>
-            <p className='videoHorizontal__title mb-1'>
+         <div className='text-sm right p-0 ml-2'>
+            <p className='font-bold mb-1'>
                Be a full stack developer in 1 month
             </p>
-            <div className='videoHorizontal__details'>
-               {numeral(1000000).format('0.a')} Views •
+            <div>
+            <i class="bi bi-eye-fill"></i> {numeral(1000000).format('0.a')} Views •
                {moment('2020-06-09').fromNow()}
             </div>
-
-            <div className='videoHorizontal__channel d-flex align-items-center my-1'>
-               <LazyLoadImage
-               src='https://www.pngkey.com/png/full/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png'
-               effect='blur'
-             
-            />
-               <p>Backbench Coder</p>
+            <p>Backbench Coder</p>
             </div>
          </div>
-      </div>
    )
     
 }

@@ -5,7 +5,7 @@ import { MdThumbUp, MdThumbDown } from "react-icons/md";
 import ShowMoreText from "react-show-more-text";
 const VideoMetaData = () => {
   return (
-    <div className="py-1 w-[850px]">
+    <div className="py-1 w-[750px]">
       <h5 className="font-bold">Video Title</h5>
       <div className="flex justify-between align-middle font-medium">
         <span>

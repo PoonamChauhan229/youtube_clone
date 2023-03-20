@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import { closeMenu } from "../utilis/appSlice";
 import CommentsContainer from "./CommentsContainer";
 import LiveChat from "./LiveChat";
+import VideoHorizontal from "./VideoHorizontal";
 import VideoMetaData from "./VideoMetaData";
 
 const WatchPage = () => {
@@ -34,6 +35,7 @@ const WatchPage = () => {
       </div>
       <div className="px-5">
       <VideoMetaData/>
+      <VideoHorizontal/>
       </div>
     </div>
   );

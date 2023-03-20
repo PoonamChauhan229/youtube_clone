@@ -7,3 +7,9 @@
     width:40px !important;
     border-radius: 9999px !important;
 }
+.showMoreText{
+      text-decoration: none;
+         display: block;
+         margin: 0.2rem 0;
+         font-weight: 700;
+}

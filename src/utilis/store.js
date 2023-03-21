@@ -4,6 +4,7 @@ import categorySearchSlice from "./categorySearchSlice";
 import chatSlice from "./chatSlice";
 import searchSlice from "./searchSlice";
 import updateSearchSlice from "./updateSearchSlice";
+import videoIdSlice from "./videoIdSlice";
 
 const store=configureStore({
 //it takes reducer.
@@ -12,7 +13,8 @@ const store=configureStore({
         search:searchSlice,
         chat:chatSlice,
         results:updateSearchSlice,
-        categoryResults:categorySearchSlice
+        categoryResults:categorySearchSlice,
+        videoResults:videoIdSlice
     }
 
 })

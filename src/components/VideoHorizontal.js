@@ -24,7 +24,7 @@ const VideoHorizontal = () => {
                Be a full stack developer in 1 month
             </p>
             <div>
-            <i class="bi bi-eye-fill"></i> {numeral(1000000).format('0.a')} Views •
+            <i className="bi bi-eye-fill"></i> {numeral(1000000).format('0.a')} Views •
                {moment('2020-06-09').fromNow()}
             </div>
             <p>Backbench Coder</p>

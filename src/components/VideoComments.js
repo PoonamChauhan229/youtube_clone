@@ -1,8 +1,10 @@
-import React from 'react'
+
 import CommentSection from './CommentSection'
 
 const VideoComments = () => {
-  return (
+   
+   
+   return (
     <div className='comments'>
          <p>1234 Comments</p>
          <div className='flex w-full my-2'>

@@ -62,6 +62,7 @@ const VideoContainer = () => {
     }
   }
 
+  // infinite scrolling
  async function fetchVideos(){
   let data = await fetch(YOUTUBE_VIDEOS_API);
    let json = await data.json();
@@ -73,6 +74,7 @@ async function fetchmoreData(){
   setVideo([...video,...videoinfinite])
 }
 
+  // infinite scrolling
 async function getResultVideoList() {
   if (searchQuery !== "") {
     const data = await fetch(YOUTUBE_SEARCH_SHOWVIDEO_API + searchQuery);
@@ -92,7 +94,7 @@ async function fetchresultData(){
         <InfiniteScroll
           dataLength={resultVideos.length} //This is important field to render the next data
           hasMore={true}
-          next={setTimeout(fetchresultData,500)}          
+          //next={setTimeout(fetchresultData,500)}          
           loader={<Loader/>}       
         >
           <div  className=" w-full flex flex-wrap  h-[550px]">
@@ -117,7 +119,7 @@ async function fetchresultData(){
         <InfiniteScroll
           dataLength={resultVideos.length} //This is important field to render the next data
           hasMore={true}
-          next={setTimeout(fetchmoreData,500)}          
+        //  next={setTimeout(fetchmoreData,500)}          
           loader={<Loader/>}
         >
            {

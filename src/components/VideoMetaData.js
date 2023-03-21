@@ -1,25 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import moment from "moment";
 import numeral from "numeral";
 import { MdThumbUp, MdThumbDown } from "react-icons/md";
 import ShowMoreText from "react-show-more-text";
-const VideoMetaData = () => {
+import { useSelector } from "react-redux";
+
+const VideoMetaData = ({videofetchData}) => {
+  const videoData = useSelector((store) => store.videoResults);
+  console.log(videoData);
+  const { isVideo, videoId } = videoData;
+  console.log(isVideo, videoId);
+  console.log(videofetchData)
+    const { snippet, statistics } = videofetchData; 
   return (
     <div className="py-1 w-[750px]">
-      <h5 className="font-bold">Video Title</h5>
+      <h5 className="font-bold">{snippet?.title}</h5>
       <div className="flex justify-between align-middle font-medium">
         <span>
-          {numeral(10000).format("0.a")} Views •{moment("2020-06-6").fromNow()}
+          {numeral(statistics.viewCount).format("0.a")} Views •{moment(snippet?.publishedAt).fromNow()}
         </span>
 
         <div className="flex">
           <span className="mr-3 flex p-0 leading-none">
             <MdThumbUp size={20} />
-            {numeral(10000).format("0.a")}
+            {numeral(statistics.likeCount).format("0.a")}
           </span>
           <span className="flex leading-none">
             <MdThumbDown size={20} />
-            <span>{numeral(10000).format("0.a")}</span>
+            <span>{numeral(statistics.commentCount).format("0.a")}</span>
           </span>
         </div>
       </div>
@@ -32,7 +40,7 @@ const VideoMetaData = () => {
             className="rounder-circle mr-3 w-[50px] h-[50px]"
           />
           <div className="flex flex-col font-bold">
-            <span>Backbench Coder</span>
+            <span>{snippet.channelTitle}</span>
             <span> {numeral(10000).format("0.a")} Subscribers</span>
           </div>
         </div>
@@ -46,18 +54,10 @@ const VideoMetaData = () => {
           lines={3}
           more="SHOW MORE"
           less="SHOW LESS"
-          anchorClass="showMoreText"
+          anchorclassName="showMoreText"
           expanded={false}
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
-          cupiditate, aspernatur a modi, nostrum porro suscipit vero ratione
-          pariatur eos atque dignissimos tempora autem corporis officia option
-          Lorem ipsum dolor sit amet consectetur adipis elit. Doloremque
-          cupiditate, aspernatur a modi, nostrum porro suscipit vero ratione
-          pariatur eos atque dignissimos tempora autem corporis officia option
-          Lorem ipsum dolor sit amet consectetur adipis elit. Doloremque
-          cupiditate, aspernatur a modi, nostrum porro suscipit vero ratione
-          pariatur eos atque dignissimos tempora autem corporis officia option
+          {snippet.description}
         </ShowMoreText>
       </div>
     </div>

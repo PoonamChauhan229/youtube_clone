@@ -8,7 +8,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 const VideoCard = ({ info }) => {
   const { snippet, id } = info;
   const { channelId, channelTitle, title, publishedAt, thumbnails } = snippet;
-  console.log(snippet)
+  //console.log(snippet)
   const [views, setViews] = useState(null);
   const [duration, setDuration] = useState(null);
   const [channelIcon, setChannelIcon] = useState(null);

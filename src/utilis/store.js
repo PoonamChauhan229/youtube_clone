@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import appSlice from "./appSlice";
 import categorySearchSlice from "./categorySearchSlice";
+import channelSlice from "./channelSlice";
 import chatSlice from "./chatSlice";
 import searchSlice from "./searchSlice";
 import updateSearchSlice from "./updateSearchSlice";
@@ -14,7 +15,8 @@ const store=configureStore({
         chat:chatSlice,
         results:updateSearchSlice,
         categoryResults:categorySearchSlice,
-        videoResults:videoIdSlice
+        videoResults:videoIdSlice,
+        channelResults:channelSlice
     }
 
 })

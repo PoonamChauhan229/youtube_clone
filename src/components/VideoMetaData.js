@@ -4,10 +4,15 @@ import numeral from "numeral";
 import { MdThumbUp, MdThumbDown } from "react-icons/md";
 import ShowMoreText from "react-show-more-text";
 import { useSelector } from "react-redux";
-
+import { LazyLoadImage } from "react-lazy-load-image-component";
 const VideoMetaData = ({videofetchData}) => {
   const videoData = useSelector((store) => store.videoResults);
-  console.log(videoData);
+  const channelSubscriberData=useSelector((store)=>store.channelResults)
+  console.log(channelSubscriberData)
+  //console.log(videoData);
+  //console.log(channelData)
+  const {isChannel, channelSubscriber,channelThumbnails}=channelSubscriberData
+
   const { isVideo, videoId } = videoData;
   console.log(isVideo, videoId);
   console.log(videofetchData)
@@ -17,31 +22,36 @@ const VideoMetaData = ({videofetchData}) => {
       <h5 className="font-bold">{snippet?.title}</h5>
       <div className="flex justify-between align-middle font-medium">
         <span>
-          {numeral(statistics.viewCount).format("0.a")} Views •{moment(snippet?.publishedAt).fromNow()}
+          {numeral(statistics?.viewCount).format("0.a")} Views •{moment(snippet?.publishedAt).fromNow()}
         </span>
 
         <div className="flex">
           <span className="mr-3 flex p-0 leading-none">
             <MdThumbUp size={20} />
-            {numeral(statistics.likeCount).format("0.a")}
+            {numeral(statistics?.likeCount).format("0.a")}
           </span>
           <span className="flex leading-none">
             <MdThumbDown size={20} />
-            <span>{numeral(statistics.commentCount).format("0.a")}</span>
+            <span>{numeral(statistics?.commentCount).format("0.a")}</span>
           </span>
         </div>
       </div>
 
       <div className="flex justify-between align-middle my-2 py-1 border-y-[0.2px] border-gray-500">
         <div className="flex">
-          <img
-            src="https://www.pngkey.com/png/full/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png"
+        <LazyLoadImage
+               src={channelThumbnails}
+               effect='blur'
+               className='videoMetaData__thumbnail'
+            />
+          {/* <img
+            src={channelThumbnails}
             alt=""
-            className="rounder-circle mr-3 w-[50px] h-[50px]"
-          />
+            className="rounded border-gray-50 border shadow mr-3 w-[50px] h-[50px]"
+          /> */}
           <div className="flex flex-col font-bold">
-            <span>{snippet.channelTitle}</span>
-            <span> {numeral(10000).format("0.a")} Subscribers</span>
+            <span>{snippet?.channelTitle}</span>
+            <span> {numeral(channelSubscriber).format("0.a")} Subscribers</span>
           </div>
         </div>
 
@@ -57,7 +67,7 @@ const VideoMetaData = ({videofetchData}) => {
           anchorclassName="showMoreText"
           expanded={false}
         >
-          {snippet.description}
+          {snippet?.description}
         </ShowMoreText>
       </div>
     </div>

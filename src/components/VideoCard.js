@@ -1,11 +1,14 @@
 import moment from "moment";
 import numeral from "numeral";
 import React, { useEffect, useState } from "react";
-import { API_Key } from "../utilis/constants";
+import { API_Key, YOUTUBE_CHANNEL_API } from "../utilis/constants";
 
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { useDispatch } from "react-redux";
+import { channelSubscriber,channelThumbnails } from "../utilis/channelSlice";
 
 const VideoCard = ({ info }) => {
+  const dispatch=useDispatch()
   const { snippet, id } = info;
   const { channelId, channelTitle, title, publishedAt, thumbnails } = snippet;
   //console.log(snippet)
@@ -19,15 +22,17 @@ const VideoCard = ({ info }) => {
   useEffect(() => {
     getChannelIcon();
   }, [channelId]);
-
+//console.log(YOUTUBE_CHANNEL_API+channelId+"&key="+API_Key)
   async function getVideoDetails() {
-    let data = await fetch(
-      `https://youtube.googleapis.com/youtube/v3/videos?part=contentDetails%2Cstatistics&id=${id}&key=${API_Key}`
-    );
+    let data = await fetch(YOUTUBE_CHANNEL_API+channelId+"&key="+API_Key);
     let json = await data.json();
-    // console.log(json.items)
-    setDuration(json.items[0].contentDetails.duration);
-    setViews(json.items[0].statistics.viewCount);
+    //console.log(json?.items)
+    setDuration(json?.items[0]?.contentDetails?.duration);
+    setViews(json?.items[0]?.statistics?.viewCount);
+
+    dispatch(channelSubscriber(json.items[0].statistics.subscriberCount))
+
+    dispatch(channelThumbnails(json.items[0].snippet.thumbnails.default.url))
   }
 
   async function getChannelIcon() {

@@ -19,8 +19,8 @@ const WatchPage = () => {
   const [videofetchData, setvideofetchData] = useState([]);
 
   let [searchParams] = useSearchParams();
-  console.log(searchParams.get("v"));
-  console.log(searchParams);
+  //console.log(searchParams.get("v"));
+  //console.log(searchParams);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(closeMenu());
@@ -38,7 +38,7 @@ const WatchPage = () => {
     if (isVideo) {
       const data = await fetch(VIDEO_DETAILS_API + videoId + "&key=" + API_Key);
       const json = await data.json();
-      console.log(json?.items[0]);
+      //console.log(json?.items[0]);
       setvideofetchData(json?.items[0]);
     }
   }

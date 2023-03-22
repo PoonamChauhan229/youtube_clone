@@ -1,9 +1,28 @@
 
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { API_Key, YOUTUBE_COMMENTS_LIST_API } from '../utilis/constants';
 import CommentSection from './CommentSection'
 
 const VideoComments = () => {
    
+   const videoData = useSelector((store) => store.videoResults);
+   const { isVideo, videoId } = videoData;
+   const[commentList,setCommentList]=useState([])
+
+   useEffect(() => {
+     
+      getCommentsData()
+   }, [videoId])
    
+
+   async function getCommentsData() {
+      let data = await fetch(YOUTUBE_COMMENTS_LIST_API+videoId+"&key="+API_Key);
+      let json = await data.json();
+    // console.log(json.items);
+     setCommentList(json?.items)         
+    }
+    //console.log(commentList)
    return (
     <div className='comments'>
          <p>1234 Comments</p>
@@ -22,9 +41,9 @@ const VideoComments = () => {
                <button className='border-0 p-2 bg-slate-600 text-white hover:bg-gray-900'>Comment</button>
             </form>
          </div>
-         <div className='comments__list'>
-            {[...Array(15)].map(() => (
-               <CommentSection/>
+      <div className='comments__list'>
+            {commentList.map((element,index) => (
+               <CommentSection {...element} key={index}/>
             ))}
          </div>
       </div>

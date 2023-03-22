@@ -8,14 +8,14 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 const VideoMetaData = ({videofetchData}) => {
   const videoData = useSelector((store) => store.videoResults);
   const channelSubscriberData=useSelector((store)=>store.channelResults)
-  console.log(channelSubscriberData)
+  //console.log(channelSubscriberData)
   //console.log(videoData);
   //console.log(channelData)
   const {isChannel, channelSubscriber,channelThumbnails}=channelSubscriberData
 
   const { isVideo, videoId } = videoData;
-  console.log(isVideo, videoId);
-  console.log(videofetchData)
+  //console.log(isVideo, videoId);
+  //console.log(videofetchData)
     const { snippet, statistics } = videofetchData; 
   return (
     <div className="py-1 w-[750px]">

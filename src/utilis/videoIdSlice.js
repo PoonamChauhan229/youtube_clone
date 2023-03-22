@@ -8,6 +8,7 @@ const videoIdSlice = createSlice({
         isVideo:false,
         videoId:null,
         commentNum:null,
+        duration:null
     },
     reducers:{
         videoIdResults:(state,action)=>{
@@ -17,8 +18,11 @@ const videoIdSlice = createSlice({
         commentCount:(state,action)=>{
             state.commentNum=action.payload
         },
+        durationResults:(state,action)=>{
+            state.duration=action.payload
+        },
     }
 })
-export const{videoIdResults,commentCount}=videoIdSlice.actions
+export const{videoIdResults,commentCount,durationResults}=videoIdSlice.actions
 export default videoIdSlice.reducer
 

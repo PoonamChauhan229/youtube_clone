@@ -2,7 +2,7 @@ import React, { useEffect ,useState} from "react";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { closeMenu } from "../utilis/appSlice";
-import { commentCount, videoIdResults } from "../utilis/videoIdSlice";
+import { commentCount, durationResults, videoIdResults } from "../utilis/videoIdSlice";
 import CommentsContainer from "./CommentsContainer";
 import LiveChat from "./LiveChat";
 import VideoComments from "./VideoComments";
@@ -28,7 +28,7 @@ const WatchPage = () => {
   }, []);
 
   useEffect(()=>{
-    dispatch(videoIdResults(searchParams.get("v")))
+    dispatch(videoIdResults(searchParams.get("v"))) 
 
   },[])
 
@@ -44,9 +44,10 @@ const WatchPage = () => {
     if (isVideo) {
       const data = await fetch(VIDEO_DETAILS_API + videoId + "&key=" + API_Key);
       const json = await data.json();
-      //console.log(json?.items[0]);
+      console.log(json?.items[0]);
       setvideofetchData(json?.items[0]);      
       dispatch(commentCount(json?.items[0]?.statistics?.commentCount))
+      dispatch(durationResults(json?.items[0]?.contentDetails.duration))
     }
   }
 

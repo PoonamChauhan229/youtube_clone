@@ -4,11 +4,11 @@
 
 //export const API_Key ="AIzaSyDW5O83bCNfRSw3bZfy-1fBdWYvCbAlqH4";
 
-export const API_Key ="AIzaSyCnnkWtlAZou4_avVzRa-fYbRYkBA0tyDw"
+//export const API_Key ="AIzaSyCnnkWtlAZou4_avVzRa-fYbRYkBA0tyDw"
 
 //export const API_Key ="AIzaSyAZEoItlxlBvPPnei-C_AI5xtI6XLidVeU";
 
-//export const API_Key="AIzaSyDSgynQrJ0CfesFQ1bq_BR2aKCvZwA06l0";
+export const API_Key="AIzaSyDSgynQrJ0CfesFQ1bq_BR2aKCvZwA06l0";
 
 export const YOUTUBE_VIDEOS_API = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=48&regionCode=IN&key=${API_Key}`;
 
@@ -21,9 +21,7 @@ export const YOUTUBE_SEARCH_SHOWVIDEO_API=`https://youtube.googleapis.com/youtub
 
 // https://youtube.googleapis.com/youtube/v3/search?&maxResults=10&key=AIzaSyA9LK-lPhJSJuK9WdnZqBlaC_5oxQyxeMo
 
-export const GENERIC_VIDEOS=`https://youtube.googleapis.com/youtube/v3/videos?part=contentDetails%2Cstatistics&id=id&key=${API_Key}`
-
-export const VIDEO_DETAILS_API=`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2Cstatistics&id=`
+export const VIDEO_DETAILS_API="https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id="
 
 export const YOUTUBE_CHANNEL_API="https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id="
 

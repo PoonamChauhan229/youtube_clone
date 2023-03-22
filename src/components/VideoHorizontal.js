@@ -3,10 +3,30 @@ import React from 'react'
 import moment from 'moment'
 import numeral from 'numeral'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+import { useEffect, useState } from "react";
+import { API_Key, VIDEO_DETAILS_API } from '../utilis/constants';
 
 const VideoHorizontal = ({id,snippet}) => {
+   const [views, setViews] = useState(null)
+   const [duration, setDuration] = useState(null)
    const {title,publishedAt,channelId,description,thumbnails,channelTitle}=snippet
-    const seconds = moment.duration('100').asSeconds()
+   const{videoId}=id
+   console.log(id)
+useEffect(() => {
+  getVideowithID()
+  }, [videoId])
+
+
+async function getVideowithID() {
+   if (videoId) {
+     const data = await fetch(VIDEO_DETAILS_API + videoId + "&key=" + API_Key);
+     const json = await data.json();
+     console.log(json?.items[0]);
+     setDuration(json?.items[0].contentDetails.duration)
+         setViews(json?.items[0].statistics.viewCount)
+      }
+ }
+    const seconds = moment.duration(duration).asSeconds()
     const _duration = moment.utc(seconds * 1000).format('mm:ss')    
   
 

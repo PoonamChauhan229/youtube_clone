@@ -7,43 +7,31 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useDispatch } from "react-redux";
 import { channelSubscriber,channelThumbnails } from "../utilis/channelSlice";
 
-const VideoCard = ({ info }) => {
+const VideoCard = ({ info}) => {
+ // console.log(info)
   const dispatch=useDispatch()
-  const { snippet, id } = info;
+  const { snippet, id,contentDetails,statistics} = info;
   const { channelId, channelTitle, title, publishedAt, thumbnails } = snippet;
-  //console.log(snippet)
-  const [views, setViews] = useState(null);
-  const [duration, setDuration] = useState(null);
+  const{duration }=contentDetails
+  const{viewCount}=statistics
+  
   const [channelIcon, setChannelIcon] = useState(null);
   useEffect(() => {
-    getVideoDetails();
-  }, [id]);
+    getChannelDetails();
+  }, [id,channelId]);
   //console.log(`https://youtube.googleapis.com/youtube/v3/channels?part=snippet&id=${channelId}&key=${API_Key}`)
-  useEffect(() => {
-    getChannelIcon();
-  }, [channelId]);
-//console.log(YOUTUBE_CHANNEL_API+channelId+"&key="+API_Key)
-  async function getVideoDetails() {
+  
+  //console.log(YOUTUBE_CHANNEL_API+channelId+"&key="+API_Key)
+  async function getChannelDetails() {
     let data = await fetch(YOUTUBE_CHANNEL_API+channelId+"&key="+API_Key);
     let json = await data.json();
-    //console.log(json?.items)
-    setDuration(json?.items[0]?.contentDetails?.duration);
-    setViews(json?.items[0]?.statistics?.viewCount);
-
+    //console.log(json?.items) 
+    setChannelIcon(json.items[0].snippet.thumbnails.default.url);     
     dispatch(channelSubscriber(json.items[0].statistics.subscriberCount))
-
     dispatch(channelThumbnails(json.items[0].snippet.thumbnails.default.url))
+    
   }
 
-  async function getChannelIcon() {
-    let data = await fetch(
-      `https://youtube.googleapis.com/youtube/v3/channels?part=snippet&id=${channelId}&key=${API_Key}`
-    );
-    let json = await data.json();
-    //console.log(json.items)
-    setChannelIcon(json.items[0].snippet.thumbnails.default.url);
-  }
-  // console.log(info)
 
   // duration -install moment library
 
@@ -61,7 +49,7 @@ const VideoCard = ({ info }) => {
           {title}
         </li>
         <li className="font-medium py-2">
-          <i className="bi bi-eye-fill "></i> {numeral(views).format("0.a")}{" "}
+          <i className="bi bi-eye-fill "></i> {numeral(viewCount).format("0.a")}{" "}
           Views
         </li>
         <li className="font-semibold">{moment(publishedAt).fromNow()}</li>

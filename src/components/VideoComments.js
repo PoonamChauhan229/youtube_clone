@@ -7,13 +7,15 @@ import CommentLiveMessage from "./CommentLiveMessage";
 
 const VideoComments = () => {
   const videoData = useSelector((store) => store.videoResults);
-  const { isVideo, videoId } = videoData;
+  const { isVideo, videoId,commentNum } = videoData;
   const [commentList, setCommentList] = useState([]);
   const dispatch = useDispatch();
   const [liveMessage, setLiveMessage] = useState("");
   const chatMessages = useSelector((store) => store.chat.messages);
   useEffect(() => {
+   if(videoId){
     getCommentsData();
+   }
   }, [videoId]);
 
   async function getCommentsData() {
@@ -27,8 +29,8 @@ const VideoComments = () => {
   //console.log(commentList)
   return (
     <div className="comments w-[750px]">
-      <p>1234 Comments</p>
-      <div className="flex w-full my-2">
+      <p className="font-medium">{commentNum} Comments</p>
+      <div className="commentssubheading flex w-full my-2">
         <img
           src="https://www.pngkey.com/png/full/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png"
           alt=""

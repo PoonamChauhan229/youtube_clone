@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   YOUTUBE_SEARCH_SHOWVIDEO_API,
@@ -9,8 +9,10 @@ import VideoCard from "./VideoCard";
 
 import InfiniteScroll from "react-infinite-scroll-component";
 import Loader from "./Loader";
+import { commentCount, subscriberCount } from "../utilis/videoIdSlice";
 
 const VideoContainer = () => {
+  const dispatch=useDispatch()
   const { searchQuery, isSearched } = useSelector((store) => store.results);
   const [isCalled, setIsCalled] = useState(false);
   const [isCategoryCalled, setisCategoryCalled] = useState(false);
@@ -20,7 +22,7 @@ const VideoContainer = () => {
   const { isCategorySearched, categorysearchQuery } = useSelector(
     (store) => store.categoryResults
   );
-
+  
   useEffect(() => {
     isSearched
       ? getSuggestedVideoList()
@@ -30,23 +32,25 @@ const VideoContainer = () => {
   }, [isSearched, searchQuery, isCategorySearched]);
 
  // console.log(isCategorySearched, categorysearchQuery);
-  async function getVideos() {
+ //console.log(YOUTUBE_VIDEOS_API) 
+ async function getVideos() {
     let data = await fetch(YOUTUBE_VIDEOS_API);
     let json = await data.json();
    // console.log(json.items);
     setVideo(json.items);
-       
+
   }
   //console.log(video) 
   async function getSuggestedVideoList() {
     if (searchQuery !== "") {
       const data = await fetch(YOUTUBE_SEARCH_SHOWVIDEO_API + searchQuery);
       const json = await data.json();
-      console.log(json);
+     // console.log(json);
       setResultVideos(json.items);
       //console.log(json.items);
       setIsCalled(true);
     }
+      
   }
 
   async function getCategoryVideoList() {
@@ -105,7 +109,7 @@ async function fetchresultData(){
                 to={"/watch?v=" + element.id.videoId}
                 //key={element.id.videoId}
               >
-                <VideoCard info={element} />
+                <VideoCard info={element}/>
               </Link>
             );
           })}

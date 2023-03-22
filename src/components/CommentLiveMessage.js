@@ -7,7 +7,7 @@ const CommentLiveMessage = ({
   
 
   return (
-    <div className="border-b-[2px] border-grey-500 p-2 flex text-sm">
+    <div className="border-b-[2px] border-grey-500 flex text-sm">
       {/* <img
         src="https://www.pngkey.com/png/full/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png"
         alt=""

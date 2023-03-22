@@ -2,9 +2,9 @@
 
 //export const API_Key = "AIzaSyA71kd7H4fuQcjO4Fc8eZam3OFmbfpUkvA";
 
-export const API_Key ="AIzaSyDW5O83bCNfRSw3bZfy-1fBdWYvCbAlqH4";
+//export const API_Key ="AIzaSyDW5O83bCNfRSw3bZfy-1fBdWYvCbAlqH4";
 
-//export const API_Key ="AIzaSyCnnkWtlAZou4_avVzRa-fYbRYkBA0tyDw"
+export const API_Key ="AIzaSyCnnkWtlAZou4_avVzRa-fYbRYkBA0tyDw"
 
 //export const API_Key ="AIzaSyAZEoItlxlBvPPnei-C_AI5xtI6XLidVeU";
 
@@ -31,3 +31,5 @@ export const YOUTUBE_CHANNEL_API="https://youtube.googleapis.com/youtube/v3/chan
 // https://youtube.googleapis.com/youtube/v3/subscriptions?channelId=UCAuUUnT6oDeKwE6v1NGQxug&key=AIzaSyDW5O83bCNfRSw3bZfy-1fBdWYvCbAlqH4
 
 export const YOUTUBE_COMMENTS_LIST_API="https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId="
+
+export const YOUTUBE_RELATED_VIDEOS_API="https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=15&type=video&relatedToVideoId="

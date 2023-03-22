@@ -46,3 +46,9 @@
     border: none;
     border-bottom: 2px solid #353946;
 }
+.commentsBlock .lazy-load-image-background img{
+    height:50px !important;
+    width:50px !important;
+    border-radius: 9999px !important;
+    /* margin-right: 15px; */
+}

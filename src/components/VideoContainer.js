@@ -9,7 +9,6 @@ import VideoCard from "./VideoCard";
 
 import InfiniteScroll from "react-infinite-scroll-component";
 import Loader from "./Loader";
-import { commentCount, subscriberCount } from "../utilis/videoIdSlice";
 
 const VideoContainer = () => {
   const dispatch=useDispatch()

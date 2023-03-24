@@ -2,9 +2,8 @@ import React, { useEffect ,useState} from "react";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { closeMenu } from "../utilis/appSlice";
-import { commentCount, durationResults, videoIdResults } from "../utilis/videoIdSlice";
-import CommentsContainer from "./CommentsContainer";
-import LiveChat from "./LiveChat";
+import { commentCount, durationResults, loadingStatus, videoIdResults, videoIdStatus } from "../utilis/videoIdSlice";
+
 import VideoComments from "./VideoComments";
 import VideoHorizontal from "./VideoHorizontal";
 import VideoMetaData from "./VideoMetaData";
@@ -13,38 +12,38 @@ import { useSelector } from 'react-redux'
 import { API_Key, VIDEO_DETAILS_API, YOUTUBE_RELATED_VIDEOS_API } from "../utilis/constants";
 const WatchPage = () => {
   const videoData=useSelector((store)=>store.videoResults)
-   console.log(videoData)
-   const {isVideo, videoId}=videoData
-   
+  const {isVideo, videoId,loading}=videoData
+  //console.log(videoData)
+
+  // console.log(loading)
   const [videofetchData, setvideofetchData] = useState([]);
   const [relatedVideo,setRelatedVideo]=useState([])
-
+  // const [vId,setVId]=useState(videoId)
   let [searchParams] = useSearchParams();
-  //console.log(searchParams.get("v"));
-  //console.log(searchParams);
+  // //console.log(searchParams.get("v"));
+  // //console.log(searchParams);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(closeMenu());
   }, []);
 
   useEffect(()=>{
-    dispatch(videoIdResults(searchParams.get("v"))) 
-
+    dispatch(videoIdResults(searchParams.get("v")));
+    dispatch(videoIdStatus(!isVideo))
   },[])
 
-   useEffect(() => {
+    useEffect(() => {
     getVideoMetaData();
-  }, [isVideo]);
-
-  useEffect(()=>{
     getRelatedVideos()
-  },[isVideo])
+  }, [videoId]);
 
+   
   async function getVideoMetaData() {
-    if (isVideo) {
+    if(videoId !=null){
+      //console.log(VIDEO_DETAILS_API + videoId + "&key=" + API_Key)
       const data = await fetch(VIDEO_DETAILS_API + videoId + "&key=" + API_Key);
       const json = await data.json();
-      console.log(json?.items[0]);
+      //console.log(json?.items[0]);
       setvideofetchData(json?.items[0]);      
       dispatch(commentCount(json?.items[0]?.statistics?.commentCount))
       dispatch(durationResults(json?.items[0]?.contentDetails.duration))
@@ -52,13 +51,15 @@ const WatchPage = () => {
   }
 
   async function getRelatedVideos(){
-    if (isVideo) {
+    if(videoId !=null){
+      console.log(YOUTUBE_RELATED_VIDEOS_API + videoId + "&key=" + API_Key)
       const data = await fetch(YOUTUBE_RELATED_VIDEOS_API + videoId + "&key=" + API_Key);
       const json = await data.json();
-      console.log(json?.items);
+     // console.log(json?.items);
       setRelatedVideo(json?.items)
-    }
-  }
+  }}
+ 
+  // //console.log(loading)
   return (
     <>
     <div className="flex flex-col">

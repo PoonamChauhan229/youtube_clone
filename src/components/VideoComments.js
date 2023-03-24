@@ -12,6 +12,7 @@ const VideoComments = () => {
   const dispatch = useDispatch();
   const [liveMessage, setLiveMessage] = useState("");
   const chatMessages = useSelector((store) => store.chat.messages);
+  console.log(videoId)
   useEffect(() => {
    if(videoId){
     getCommentsData();
